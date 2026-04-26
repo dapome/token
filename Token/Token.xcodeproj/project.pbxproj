@@ -7,12 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		01B810922F94886000B23E1C /* main-icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 01B810912F94886000B23E1C /* main-icon.icon */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 			01B8101D2F947C0A00B23E1C /* Token.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Token.app; sourceTree = BUILT_PRODUCTS_DIR; };
-			01B810912F94886000B23E1C /* main-icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "main-icon.icon"; sourceTree = "<group>"; };
 			01B810A02F948A0000B23E1C /* TokenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TokenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -50,7 +48,6 @@
 		01B810142F947C0A00B23E1C = {
 			isa = PBXGroup;
 				children = (
-					01B810912F94886000B23E1C /* main-icon.icon */,
 					01B8101F2F947C0A00B23E1C /* Token */,
 					01B810A12F948A0000B23E1C /* TokenTests */,
 					01B8101E2F947C0A00B23E1C /* Products */,
@@ -168,7 +165,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				01B810922F94886000B23E1C /* main-icon.icon in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			};
@@ -330,7 +326,7 @@
 		01B810292F947C0B00B23E1C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "main-icon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				AUTOMATION_APPLE_EVENTS = NO;
@@ -378,7 +374,7 @@
 			01B8102A2F947C0B00B23E1C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = "main-icon";
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				AUTOMATION_APPLE_EVENTS = NO;
