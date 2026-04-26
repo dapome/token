@@ -19,7 +19,7 @@ jobs:
           xcode-version: latest-stable
 
       - name: Build
-        run: xcodebuild -project "Token/Token.xcodeproj" -scheme Token -destination 'platform=macOS' build
+        run: xcodebuild -project "Token/Token.xcodeproj" -scheme Token -destination 'platform=macOS' ASSETCATALOG_COMPILER_APPICON_NAME=AppIcon build
 
       - name: Test
-        run: xcodebuild -project "Token/Token.xcodeproj" -scheme Token -destination 'platform=macOS' test
+        run: xcodebuild -project "Token/Token.xcodeproj" -scheme Token -destination 'platform=macOS' ASSETCATALOG_COMPILER_APPICON_NAME=AppIcon test
