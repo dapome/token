@@ -1,0 +1,60 @@
+name: Bug report
+description: Report a reproducible problem in Token.
+title: "[Bug]: "
+labels:
+  - bug
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for filing a bug report. Please do not include API keys or other sensitive data.
+        For suspected vulnerabilities, use private reporting in SECURITY.md instead of public issues.
+  - type: dropdown
+    id: provider
+    attributes:
+      label: Provider area
+      description: Which provider or area is affected?
+      options:
+        - OpenAI
+        - Anthropic
+        - OpenRouter
+        - UI/Menu bar
+        - Build/Test
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: summary
+    attributes:
+      label: What happened?
+      description: A concise description of the bug.
+      placeholder: Describe the issue and what you expected.
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: Steps to reproduce
+      description: Provide a reliable sequence to reproduce.
+      placeholder: |
+        1. ...
+        2. ...
+        3. ...
+    validations:
+      required: true
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs or payload snippets (redacted)
+      description: Paste only redacted output.
+      render: shell
+  - type: input
+    id: version
+    attributes:
+      label: App version
+      placeholder: e.g. 0.2
+  - type: input
+    id: macos
+    attributes:
+      label: macOS version
+      placeholder: e.g. 26.2

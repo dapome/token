@@ -1,0 +1,12 @@
+# Default owner for the whole repository
+* @dapome
+
+# Workflow and policy files
+/.github/ @dapome
+/SECURITY.md @dapome
+/CODE_OF_CONDUCT.md @dapome
+/README.md @dapome
+/CONTRIBUTING.md @dapome
+
+# App source and tests
+/Token/ @dapome
