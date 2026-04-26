@@ -1,0 +1,46 @@
+name: Feature request
+description: Suggest an improvement to Token.
+title: "[Feature]: "
+labels:
+  - enhancement
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Thanks for the idea. Please keep requests focused and avoid posting secrets or sensitive account details.
+        For suspected vulnerabilities, use private reporting in SECURITY.md instead of public issues.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem statement
+      description: What pain point are you trying to solve?
+      placeholder: I want to...
+    validations:
+      required: true
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed solution
+      description: Describe the behavior you want.
+      placeholder: The app should...
+    validations:
+      required: true
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - OpenAI
+        - Anthropic
+        - OpenRouter
+        - UI/Menu bar
+        - Settings/Credentials
+        - Build/Packaging
+        - Other
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives considered
+      description: Any workaround or alternative approaches?
