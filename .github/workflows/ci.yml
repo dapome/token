@@ -13,8 +13,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Select latest stable Xcode
+        uses: maxim-lobanov/setup-xcode@v1
+        with:
+          xcode-version: latest-stable
+
       - name: Build
-        run: xcodebuild -project "Token/Token.xcodeproj" -scheme Token -destination 'platform=macOS' build
+        run: xcodebuild -project "Token/Token.xcodeproj" -scheme Token -destination 'platform=macOS' MACOSX_DEPLOYMENT_TARGET=15.0 build
 
       - name: Test
-        run: xcodebuild -project "Token/Token.xcodeproj" -scheme Token -destination 'platform=macOS' test
+        run: xcodebuild -project "Token/Token.xcodeproj" -scheme Token -destination 'platform=macOS' MACOSX_DEPLOYMENT_TARGET=15.0 test
