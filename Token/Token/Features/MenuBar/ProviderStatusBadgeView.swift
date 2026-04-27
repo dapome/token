@@ -4,19 +4,6 @@ struct ProviderStatusBadgeView: View {
     let provider: ProviderKind
     let state: ProviderLoadState
 
-    private var title: String {
-        switch state {
-        case .notConfigured:
-            "Needs Key"
-        case .loading:
-            "Refreshing"
-        case .loaded:
-            "Connected"
-        case .failed:
-            "Attention"
-        }
-    }
-
     private var systemImage: String {
         switch state {
         case .notConfigured:
@@ -30,24 +17,36 @@ struct ProviderStatusBadgeView: View {
         }
     }
 
-    private var backgroundColor: Color {
+    private var tintColor: Color {
         switch state {
         case .notConfigured:
-            .secondary.opacity(0.16)
+            .secondary
         case .loading:
-            provider.secondaryAccentColor.opacity(0.2)
+            .secondary
         case .loaded:
-            provider.accentColor.opacity(0.18)
+            .secondary
         case .failed:
-            .orange.opacity(0.2)
+            .orange
         }
     }
 
     var body: some View {
-        Label(title, systemImage: systemImage)
-            .font(.footnote)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 6)
-            .background(backgroundColor, in: Capsule())
+        Image(systemName: systemImage)
+            .font(.caption.weight(.semibold))
+            .foregroundStyle(tintColor)
+            .help(accessibilityTitle)
+    }
+
+    private var accessibilityTitle: String {
+        switch state {
+        case .notConfigured:
+            "\(provider.title) needs a key"
+        case .loading:
+            "\(provider.title) refreshing"
+        case .loaded:
+            "\(provider.title) connected"
+        case .failed:
+            "\(provider.title) needs attention"
+        }
     }
 }

@@ -7,66 +7,79 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		011E9AEE2F9EFF9A00701525 /* main-icon.icon in Resources */ = {isa = PBXBuildFile; fileRef = 011E9AED2F9EFF9A00701525 /* main-icon.icon */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		01B810A72F948A0000B23E1C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 01B810152F947C0A00B23E1C /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 01B8101C2F947C0A00B23E1C;
+			remoteInfo = Token;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
-			01B8101D2F947C0A00B23E1C /* Token.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Token.app; sourceTree = BUILT_PRODUCTS_DIR; };
-			01B810A02F948A0000B23E1C /* TokenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TokenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		011E9AED2F9EFF9A00701525 /* main-icon.icon */ = {isa = PBXFileReference; lastKnownFileType = folder.iconcomposer.icon; path = "main-icon.icon"; sourceTree = "<group>"; };
+		01B8101D2F947C0A00B23E1C /* Token.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Token.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		01B810A02F948A0000B23E1C /* TokenTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = TokenTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedRootGroup section */
-			01B8101F2F947C0A00B23E1C /* Token */ = {
-				isa = PBXFileSystemSynchronizedRootGroup;
-				path = Token;
-				sourceTree = "<group>";
-			};
-			01B810A12F948A0000B23E1C /* TokenTests */ = {
-				isa = PBXFileSystemSynchronizedRootGroup;
-				path = TokenTests;
-				sourceTree = "<group>";
-			};
+		01B8101F2F947C0A00B23E1C /* Token */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = Token;
+			sourceTree = "<group>";
+		};
+		01B810A12F948A0000B23E1C /* TokenTests */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TokenTests;
+			sourceTree = "<group>";
+		};
 /* End PBXFileSystemSynchronizedRootGroup section */
 
 /* Begin PBXFrameworksBuildPhase section */
-			01B8101A2F947C0A00B23E1C /* Frameworks */ = {
-				isa = PBXFrameworksBuildPhase;
-				buildActionMask = 2147483647;
-				files = (
-				);
-				runOnlyForDeploymentPostprocessing = 0;
-			};
-			01B810A42F948A0000B23E1C /* Frameworks */ = {
-				isa = PBXFrameworksBuildPhase;
-				buildActionMask = 2147483647;
-				files = (
-				);
-				runOnlyForDeploymentPostprocessing = 0;
-			};
+		01B8101A2F947C0A00B23E1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01B810A42F948A0000B23E1C /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
 		01B810142F947C0A00B23E1C = {
 			isa = PBXGroup;
-				children = (
-					01B8101F2F947C0A00B23E1C /* Token */,
-					01B810A12F948A0000B23E1C /* TokenTests */,
-					01B8101E2F947C0A00B23E1C /* Products */,
-				);
-				sourceTree = "<group>";
+			children = (
+				011E9AED2F9EFF9A00701525 /* main-icon.icon */,
+				01B8101F2F947C0A00B23E1C /* Token */,
+				01B810A12F948A0000B23E1C /* TokenTests */,
+				01B8101E2F947C0A00B23E1C /* Products */,
+			);
+			sourceTree = "<group>";
 		};
 		01B8101E2F947C0A00B23E1C /* Products */ = {
 			isa = PBXGroup;
-				children = (
-					01B8101D2F947C0A00B23E1C /* Token.app */,
-					01B810A02F948A0000B23E1C /* TokenTests.xctest */,
-				);
-				name = Products;
-				sourceTree = "<group>";
-			};
+			children = (
+				01B8101D2F947C0A00B23E1C /* Token.app */,
+				01B810A02F948A0000B23E1C /* TokenTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-			01B8101C2F947C0A00B23E1C /* Token */ = {
+		01B8101C2F947C0A00B23E1C /* Token */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 01B810282F947C0B00B23E1C /* Build configuration list for PBXNativeTarget "Token" */;
 			buildPhases = (
@@ -85,43 +98,33 @@
 			packageProductDependencies = (
 			);
 			productName = Token;
-				productReference = 01B8101D2F947C0A00B23E1C /* Token.app */;
-				productType = "com.apple.product-type.application";
-			};
-			01B810A22F948A0000B23E1C /* TokenTests */ = {
-				isa = PBXNativeTarget;
-				buildConfigurationList = 01B810A92F948A0000B23E1C /* Build configuration list for PBXNativeTarget "TokenTests" */;
-				buildPhases = (
-					01B810A32F948A0000B23E1C /* Sources */,
-					01B810A42F948A0000B23E1C /* Frameworks */,
-					01B810A52F948A0000B23E1C /* Resources */,
-				);
-				buildRules = (
-				);
-				dependencies = (
-					01B810A82F948A0000B23E1C /* PBXTargetDependency */,
-				);
-				fileSystemSynchronizedGroups = (
-					01B810A12F948A0000B23E1C /* TokenTests */,
-				);
-				name = TokenTests;
-				packageProductDependencies = (
-				);
-				productName = TokenTests;
-				productReference = 01B810A02F948A0000B23E1C /* TokenTests.xctest */;
-				productType = "com.apple.product-type.bundle.unit-test";
-			};
+			productReference = 01B8101D2F947C0A00B23E1C /* Token.app */;
+			productType = "com.apple.product-type.application";
+		};
+		01B810A22F948A0000B23E1C /* TokenTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 01B810A92F948A0000B23E1C /* Build configuration list for PBXNativeTarget "TokenTests" */;
+			buildPhases = (
+				01B810A32F948A0000B23E1C /* Sources */,
+				01B810A42F948A0000B23E1C /* Frameworks */,
+				01B810A52F948A0000B23E1C /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				01B810A82F948A0000B23E1C /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				01B810A12F948A0000B23E1C /* TokenTests */,
+			);
+			name = TokenTests;
+			packageProductDependencies = (
+			);
+			productName = TokenTests;
+			productReference = 01B810A02F948A0000B23E1C /* TokenTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
-
-/* Begin PBXContainerItemProxy section */
-			01B810A72F948A0000B23E1C /* PBXContainerItemProxy */ = {
-				isa = PBXContainerItemProxy;
-				containerPortal = 01B810152F947C0A00B23E1C /* Project object */;
-				proxyType = 1;
-				remoteGlobalIDString = 01B8101C2F947C0A00B23E1C;
-				remoteInfo = Token;
-			};
-/* End PBXContainerItemProxy section */
 
 /* Begin PBXProject section */
 		01B810152F947C0A00B23E1C /* Project object */ = {
@@ -153,53 +156,54 @@
 			productRefGroup = 01B8101E2F947C0A00B23E1C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
-				targets = (
-					01B8101C2F947C0A00B23E1C /* Token */,
-					01B810A22F948A0000B23E1C /* TokenTests */,
-				);
-			};
+			targets = (
+				01B8101C2F947C0A00B23E1C /* Token */,
+				01B810A22F948A0000B23E1C /* TokenTests */,
+			);
+		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-			01B8101B2F947C0A00B23E1C /* Resources */ = {
+		01B8101B2F947C0A00B23E1C /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				011E9AEE2F9EFF9A00701525 /* main-icon.icon in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		01B810A52F948A0000B23E1C /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			};
-			01B810A52F948A0000B23E1C /* Resources */ = {
-				isa = PBXResourcesBuildPhase;
-				buildActionMask = 2147483647;
-				files = (
-				);
-				runOnlyForDeploymentPostprocessing = 0;
-			};
+		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-			01B810192F947C0A00B23E1C /* Sources */ = {
+		01B810192F947C0A00B23E1C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
-			};
-			01B810A32F948A0000B23E1C /* Sources */ = {
-				isa = PBXSourcesBuildPhase;
-				buildActionMask = 2147483647;
-				files = (
-				);
-				runOnlyForDeploymentPostprocessing = 0;
-			};
+		};
+		01B810A32F948A0000B23E1C /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-			01B810A82F948A0000B23E1C /* PBXTargetDependency */ = {
-				isa = PBXTargetDependency;
-				target = 01B8101C2F947C0A00B23E1C /* Token */;
-				targetProxy = 01B810A72F948A0000B23E1C /* PBXContainerItemProxy */;
-			};
+		01B810A82F948A0000B23E1C /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 01B8101C2F947C0A00B23E1C /* Token */;
+			targetProxy = 01B810A72F948A0000B23E1C /* PBXContainerItemProxy */;
+		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
@@ -236,7 +240,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "Token/Token.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Token/Token.entitlements;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -300,7 +304,7 @@
 				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "Token/Token.entitlements";
+				CODE_SIGN_ENTITLEMENTS = Token/Token.entitlements;
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -326,15 +330,17 @@
 		01B810292F947C0B00B23E1C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "main-icon";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				AUTOMATION_APPLE_EVENTS = NO;
-				CODE_SIGN_ENTITLEMENTS = "Token/Token.entitlements";
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = Token/Token.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 99;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -352,7 +358,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.23;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.usagebuddy.token;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -371,18 +377,20 @@
 			};
 			name = Debug;
 		};
-			01B8102A2F947C0B00B23E1C /* Release */ = {
+		01B8102A2F947C0B00B23E1C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "main-icon";
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				ASSETCATALOG_COMPILER_INCLUDE_ALL_APPICON_ASSETS = YES;
 				AUTOMATION_APPLE_EVENTS = NO;
-				CODE_SIGN_ENTITLEMENTS = "Token/Token.entitlements";
-				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_ENTITLEMENTS = Token/Token.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 99;
+				DEVELOPMENT_TEAM = "";
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -400,7 +408,7 @@
 					"$(inherited)",
 					"@executable_path/../Frameworks",
 				);
-				MARKETING_VERSION = 0.2;
+				MARKETING_VERSION = 0.23;
 				PRODUCT_BUNDLE_IDENTIFIER = dev.usagebuddy.token;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
@@ -417,44 +425,44 @@
 				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
 				SWIFT_VERSION = 5.0;
 			};
-				name = Release;
+			name = Release;
+		};
+		01B810AA2F948A0000B23E1C /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.token;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Token.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Token";
 			};
-			01B810AA2F948A0000B23E1C /* Debug */ = {
-				isa = XCBuildConfiguration;
-				buildSettings = {
-					BUNDLE_LOADER = "$(TEST_HOST)";
-					CODE_SIGN_IDENTITY = "-";
-					CODE_SIGN_STYLE = Manual;
-					CURRENT_PROJECT_VERSION = 1;
-					GENERATE_INFOPLIST_FILE = YES;
-					MACOSX_DEPLOYMENT_TARGET = 26.2;
-					MARKETING_VERSION = 1.0;
-					PRODUCT_BUNDLE_IDENTIFIER = dev.usagebuddy.token.tests;
-					PRODUCT_NAME = "$(TARGET_NAME)";
-					SWIFT_EMIT_LOC_STRINGS = NO;
-					SWIFT_VERSION = 5.0;
-					TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Token.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Token";
-				};
-				name = Debug;
+			name = Debug;
+		};
+		01B810AB2F948A0000B23E1C /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_IDENTITY = "-";
+				CODE_SIGN_STYLE = Manual;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 26.2;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.example.token;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Token.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Token";
 			};
-			01B810AB2F948A0000B23E1C /* Release */ = {
-				isa = XCBuildConfiguration;
-				buildSettings = {
-					BUNDLE_LOADER = "$(TEST_HOST)";
-					CODE_SIGN_IDENTITY = "-";
-					CODE_SIGN_STYLE = Manual;
-					CURRENT_PROJECT_VERSION = 1;
-					GENERATE_INFOPLIST_FILE = YES;
-					MACOSX_DEPLOYMENT_TARGET = 26.2;
-					MARKETING_VERSION = 1.0;
-					PRODUCT_BUNDLE_IDENTIFIER = dev.usagebuddy.token.tests;
-					PRODUCT_NAME = "$(TARGET_NAME)";
-					SWIFT_EMIT_LOC_STRINGS = NO;
-					SWIFT_VERSION = 5.0;
-					TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Token.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Token";
-				};
-				name = Release;
-			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -467,24 +475,24 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-			01B810282F947C0B00B23E1C /* Build configuration list for PBXNativeTarget "Token" */ = {
+		01B810282F947C0B00B23E1C /* Build configuration list for PBXNativeTarget "Token" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				01B810292F947C0B00B23E1C /* Debug */,
 				01B8102A2F947C0B00B23E1C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
-				defaultConfigurationName = Release;
-			};
-			01B810A92F948A0000B23E1C /* Build configuration list for PBXNativeTarget "TokenTests" */ = {
-				isa = XCConfigurationList;
-				buildConfigurations = (
-					01B810AA2F948A0000B23E1C /* Debug */,
-					01B810AB2F948A0000B23E1C /* Release */,
-				);
-				defaultConfigurationIsVisible = 0;
-				defaultConfigurationName = Release;
-			};
+			defaultConfigurationName = Release;
+		};
+		01B810A92F948A0000B23E1C /* Build configuration list for PBXNativeTarget "TokenTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				01B810AA2F948A0000B23E1C /* Debug */,
+				01B810AB2F948A0000B23E1C /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 	};
 	rootObject = 01B810152F947C0A00B23E1C /* Project object */;

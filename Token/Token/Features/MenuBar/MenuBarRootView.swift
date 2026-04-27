@@ -1,4 +1,5 @@
 import SwiftUI
+import AppKit
 
 struct MenuBarRootView: View {
     @Bindable var model: AppModel
@@ -16,37 +17,30 @@ struct MenuBarRootView: View {
             (.openAI, model.openAIState),
             (.anthropic, model.anthropicState),
             (.openRouter, model.openRouterState),
+            (.gemini, model.geminiState),
         ]
     }
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: AppTheme.sectionSpacing) {
+            VStack(alignment: .leading, spacing: 10) {
                 header
                 quickLinks
+                Divider()
 
                 ForEach(configuredProviders, id: \.0) { provider, state in
                     ProviderSectionView(provider: provider, state: state)
+                    Divider()
                 }
 
                 if !unconfiguredProviders.isEmpty {
                     unconfiguredSection
                 }
             }
-            .padding(AppTheme.contentPadding)
+            .padding(10)
         }
         .frame(minWidth: AppTheme.menuWidth, minHeight: AppTheme.menuMinHeight)
-        .background(
-            LinearGradient(
-                colors: [
-                    .clear,
-                    .orange.opacity(0.06),
-                    .teal.opacity(0.05),
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
+        .background(Color(nsColor: .windowBackgroundColor))
         .task {
             await model.start()
         }
@@ -79,6 +73,13 @@ struct MenuBarRootView: View {
             }
             .buttonStyle(.borderless)
             .help("Open settings")
+
+            Button(action: quitApp) {
+                Image(systemName: "power")
+                    .font(.caption)
+            }
+            .buttonStyle(.borderless)
+            .help("Quit Token")
         }
     }
 
@@ -98,13 +99,7 @@ struct MenuBarRootView: View {
                 }
             }
         }
-        .padding(.horizontal, AppTheme.cardPadding)
-        .padding(.vertical, 8)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius))
-        .overlay(
-            RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius)
-                .stroke(.secondary.opacity(0.12), lineWidth: 1)
-        )
+        .padding(.top, 2)
     }
 
     private var quickLinks: some View {
@@ -112,11 +107,18 @@ struct MenuBarRootView: View {
             ForEach(ProviderKind.subscriptionCases) { provider in
                 Link(destination: provider.subscriptionURL) {
                     Label(provider.subscriptionTitle, systemImage: "arrow.up.right")
-                        .font(.caption)
+                        .font(.caption2)
                         .foregroundStyle(.secondary)
                 }
                 .buttonStyle(.plain)
             }
+
+            Link(destination: AppLinks.cursorUsage) {
+                Label("Cursor", systemImage: "arrow.up.right")
+                    .font(.caption2)
+                    .foregroundStyle(.secondary)
+            }
+            .buttonStyle(.plain)
 
             Spacer()
         }
@@ -126,5 +128,9 @@ struct MenuBarRootView: View {
         Task {
             await model.refreshAll()
         }
+    }
+
+    private func quitApp() {
+        NSApplication.shared.terminate(nil)
     }
 }

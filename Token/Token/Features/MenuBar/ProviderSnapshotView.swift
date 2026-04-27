@@ -5,7 +5,7 @@ struct ProviderSnapshotView: View {
     let snapshot: ProviderSnapshot
 
     var body: some View {
-        VStack(spacing: 6) {
+        VStack(spacing: 4) {
             metricRow(
                 label: "Month Spend",
                 value: UsageFormatting.currency(snapshot.costMonth)
@@ -62,7 +62,7 @@ struct ProviderSnapshotView: View {
             Spacer()
 
             Text(value)
-                .font(.callout)
+                .font(.subheadline)
                 .fontWeight(.semibold)
                 .monospacedDigit()
         }

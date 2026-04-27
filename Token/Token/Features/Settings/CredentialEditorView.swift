@@ -9,57 +9,48 @@ struct CredentialEditorView: View {
     let removeAction: () -> Void
 
     var body: some View {
-        VStack(alignment: .leading, spacing: 10) {
-            HStack {
-                Label(provider.credentialTitle, systemImage: provider.systemImage)
-                    .font(.headline)
+        GroupBox {
+            VStack(alignment: .leading, spacing: 8) {
+                SecureField(provider.credentialPrompt, text: $draft)
+                    .textFieldStyle(.roundedBorder)
+                    .autocorrectionDisabled(true)
 
-                Spacer()
+                Text(provider.credentialHelpText)
+                    .font(.caption)
+                    .foregroundStyle(.secondary)
+                    .lineLimit(2)
 
-                ProviderStatusBadgeView(provider: provider, state: state)
-            }
+                HStack(spacing: 8) {
+                    Button("Save", action: saveAction)
+                        .buttonStyle(.borderedProminent)
+                        .controlSize(.small)
+                        .disabled(trimmedDraft.isEmpty)
 
-            SecureField(provider.credentialPrompt, text: $draft)
-                .textFieldStyle(.roundedBorder)
+                    Button("Remove", action: removeAction)
+                        .buttonStyle(.bordered)
+                        .controlSize(.small)
+                        .disabled(!hasStoredCredential)
 
-            Text(provider.credentialHelpText)
-                .font(.caption)
-                .foregroundStyle(.secondary)
-
-            HStack(spacing: AppTheme.cardSpacing) {
-                Button("Save", systemImage: "key.fill", action: saveAction)
-                    .buttonStyle(.borderedProminent)
-                    .controlSize(.small)
-                    .disabled(trimmedDraft.isEmpty)
-
-                Button("Remove", systemImage: "trash", action: removeAction)
-                    .buttonStyle(.bordered)
-                    .controlSize(.small)
-                    .disabled(!hasStoredCredential)
-
-                Spacer()
-
-                if hasStoredCredential {
-                    Label("In Keychain", systemImage: "checkmark.seal.fill")
-                        .font(.caption)
-                        .foregroundStyle(.secondary)
+                    if hasStoredCredential {
+                        Text("Saved")
+                            .font(.caption)
+                            .foregroundStyle(.secondary)
+                    }
                 }
-            }
 
-            ProviderStatusView(provider: provider, state: state)
+                ProviderStatusView(provider: provider, state: state)
 
-            HStack(spacing: 12) {
-                Link("Usage API docs", destination: provider.usageDocsURL)
-                Link("Admin key requirements", destination: provider.adminDocsURL)
+                HStack(spacing: 10) {
+                    Link("Usage docs", destination: provider.usageDocsURL)
+                    Link("Admin docs", destination: provider.adminDocsURL)
+                }
+                .font(.caption)
             }
-            .font(.caption)
         }
-        .padding(AppTheme.cardPadding)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius))
-        .overlay(
-            RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius)
-                .stroke(provider.accentColor.opacity(0.18), lineWidth: 1)
-        )
+        label: {
+            Label(provider.title, systemImage: provider.systemImage)
+                .font(.subheadline.weight(.semibold))
+        }
     }
 
     private var trimmedDraft: String {

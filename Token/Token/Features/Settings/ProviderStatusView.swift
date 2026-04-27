@@ -11,8 +11,6 @@ struct ProviderStatusView: View {
             Spacer()
         }
         .font(.caption)
-        .padding(10)
-        .background(.background.opacity(0.55), in: RoundedRectangle(cornerRadius: AppTheme.tileCornerRadius))
     }
 
     @ViewBuilder
@@ -30,7 +28,7 @@ struct ProviderStatusView: View {
 
         case .loaded:
             Label("Connected and reporting", systemImage: "checkmark.circle.fill")
-                .foregroundStyle(provider.accentColor)
+                .foregroundStyle(.secondary)
 
         case let .failed(message, _):
             VStack(alignment: .leading, spacing: 4) {

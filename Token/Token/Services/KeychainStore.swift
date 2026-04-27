@@ -3,6 +3,7 @@ import Security
 
 struct KeychainStore {
     private let serviceName = Bundle.main.bundleIdentifier ?? "dev.usagebuddy.token"
+    private let accessibleClass = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
 
     func value(for provider: ProviderKind) -> String? {
         let query = baseQuery(for: provider).merging([
@@ -35,6 +36,7 @@ struct KeychainStore {
 
         let attributes: [String: Any] = [
             kSecValueData as String: data,
+            kSecAttrAccessible as String: accessibleClass,
         ]
 
         let updateStatus = SecItemUpdate(query as CFDictionary, attributes as CFDictionary)
@@ -66,6 +68,7 @@ struct KeychainStore {
             kSecClass as String: kSecClassGenericPassword,
             kSecAttrService as String: serviceName,
             kSecAttrAccount as String: provider.keychainAccount,
+            kSecAttrSynchronizable as String: kCFBooleanFalse as Any,
         ]
     }
 }
