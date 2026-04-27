@@ -1,6 +1,6 @@
 // Copy this file to LocalOverrides.xcconfig (gitignored) and fill in your values.
 APP_BUNDLE_IDENTIFIER = com.onethirteen.token
-APP_DEVELOPMENT_TEAM = YOURTEAMID
+APP_DEVELOPMENT_TEAM = WT853NZCL8
 APP_CODE_SIGN_STYLE = Automatic
 APP_CODE_SIGN_IDENTITY = Apple Development
 APP_CODE_SIGN_IDENTITY_SDK = Apple Development
