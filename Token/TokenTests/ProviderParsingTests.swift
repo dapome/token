@@ -58,8 +58,8 @@ final class ProviderParsingTests: XCTestCase {
           "data": [
             {
               "results": [
-                { "amount": "1.20" },
-                { "amount": { "value": "0.30" } }
+                { "amount": "120" },
+                { "amount": { "value": "30" } }
               ]
             }
           ]

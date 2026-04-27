@@ -195,16 +195,21 @@ extension AnthropicUsageService {
             let container = try decoder.container(keyedBy: CodingKeys.self)
             if let rawValue = try? container.decode(String.self, forKey: .amount),
                let amount = Decimal(string: rawValue, locale: Locale(identifier: "en_US_POSIX")) {
-                self.amount = amount
+                self.amount = Self.normalizeToUSD(amount)
                 return
             }
 
             if let wrappedAmount = try? container.decode(WrappedAmount.self, forKey: .amount) {
-                self.amount = wrappedAmount.decimalValue
+                self.amount = Self.normalizeToUSD(wrappedAmount.decimalValue)
                 return
             }
 
             throw UsageError.invalidPayload
+        }
+
+        private static func normalizeToUSD(_ minorUnitAmount: Decimal) -> Decimal {
+            // Anthropic reports cost amounts in the lowest currency unit (cents for USD).
+            minorUnitAmount / 100
         }
     }
 

@@ -8,26 +8,35 @@ final class AppModel {
     @ObservationIgnored private let openAIService = OpenAIUsageService()
     @ObservationIgnored private let anthropicService = AnthropicUsageService()
     @ObservationIgnored private let openRouterService = OpenRouterUsageService()
-    @ObservationIgnored private let refreshInterval: TimeInterval = 600
+    @ObservationIgnored private let geminiService = GeminiUsageService()
+    @ObservationIgnored private let refreshIntervalDefaultsKey = "auto_refresh_interval_seconds"
 
     var openAIKeyDraft = ""
     var anthropicKeyDraft = ""
     var openRouterKeyDraft = ""
+    var geminiKeyDraft = ""
 
     private(set) var hasOpenAIKey = false
     private(set) var hasAnthropicKey = false
     private(set) var hasOpenRouterKey = false
+    private(set) var hasGeminiKey = false
     private(set) var openAIState: ProviderLoadState = .notConfigured
     private(set) var anthropicState: ProviderLoadState = .notConfigured
     private(set) var openRouterState: ProviderLoadState = .notConfigured
+    private(set) var geminiState: ProviderLoadState = .notConfigured
     private(set) var isRefreshing = false
     private(set) var settingsStatusMessage: String?
+    var autoRefreshInterval: AutoRefreshInterval = .fifteenMinutes {
+        didSet {
+            UserDefaults.standard.set(autoRefreshInterval.rawValue, forKey: refreshIntervalDefaultsKey)
+        }
+    }
 
     @ObservationIgnored private var didStart = false
     @ObservationIgnored private var lastRefreshAt: Date?
 
     var lastUpdated: Date? {
-        [openAIState.snapshot?.updatedAt, anthropicState.snapshot?.updatedAt, openRouterState.snapshot?.updatedAt]
+        [openAIState.snapshot?.updatedAt, anthropicState.snapshot?.updatedAt, openRouterState.snapshot?.updatedAt, geminiState.snapshot?.updatedAt]
             .compactMap { $0 }
             .max()
     }
@@ -35,7 +44,7 @@ final class AppModel {
     var menuBarSystemImage: String {
         if isRefreshing {
             "arrow.trianglehead.2.clockwise.rotate.90"
-        } else if openAIState.errorMessage != nil || anthropicState.errorMessage != nil || openRouterState.errorMessage != nil {
+        } else if openAIState.errorMessage != nil || anthropicState.errorMessage != nil || openRouterState.errorMessage != nil || geminiState.errorMessage != nil {
             "exclamationmark.triangle.fill"
         } else {
             "chart.bar.xaxis"
@@ -51,6 +60,7 @@ final class AppModel {
     }
 
     func start() async {
+        loadRefreshPreference()
         reloadCredentialStatus()
 
         guard !didStart else {
@@ -86,9 +96,11 @@ final class AppModel {
         let openAIKey = hasOpenAIKey ? keychain.value(for: .openAI) : nil
         let anthropicKey = hasAnthropicKey ? keychain.value(for: .anthropic) : nil
         let openRouterKey = hasOpenRouterKey ? keychain.value(for: .openRouter) : nil
+        let geminiKey = hasGeminiKey ? keychain.value(for: .gemini) : nil
         let openAIService = openAIService
         let anthropicService = anthropicService
         let openRouterService = openRouterService
+        let geminiService = geminiService
 
         await withTaskGroup(of: (ProviderKind, Result<ProviderSnapshot, UsageError>).self) { group in
             if let openAIKey {
@@ -127,6 +139,18 @@ final class AppModel {
                 }
             }
 
+            if let geminiKey {
+                group.addTask {
+                    do {
+                        return (.gemini, .success(try await geminiService.fetchSnapshot(apiKey: geminiKey)))
+                    } catch let error as UsageError {
+                        return (.gemini, .failure(error))
+                    } catch {
+                        return (.gemini, .failure(.requestFailed(error.localizedDescription)))
+                    }
+                }
+            }
+
             for await (provider, result) in group {
                 apply(result, for: provider)
             }
@@ -157,18 +181,38 @@ final class AppModel {
         await removeCredential(for: .openRouter)
     }
 
+    func saveGeminiKey() async {
+        await saveCredential(for: .gemini, rawValue: geminiKeyDraft)
+    }
+
+    func removeGeminiKey() async {
+        await removeCredential(for: .gemini)
+    }
+
     private var shouldRefresh: Bool {
+        guard autoRefreshInterval != .off else {
+            return false
+        }
+
         guard let lastRefreshAt else {
             return true
         }
 
-        return Date.now.timeIntervalSince(lastRefreshAt) >= refreshInterval
+        return Date.now.timeIntervalSince(lastRefreshAt) >= TimeInterval(autoRefreshInterval.rawValue)
+    }
+
+    private func loadRefreshPreference() {
+        let rawValue = UserDefaults.standard.integer(forKey: refreshIntervalDefaultsKey)
+        if let savedInterval = AutoRefreshInterval(rawValue: rawValue), savedInterval != .off || rawValue == 0 {
+            autoRefreshInterval = savedInterval
+        }
     }
 
     private func reloadCredentialStatus() {
         hasOpenAIKey = keychain.value(for: .openAI) != nil
         hasAnthropicKey = keychain.value(for: .anthropic) != nil
         hasOpenRouterKey = keychain.value(for: .openRouter) != nil
+        hasGeminiKey = keychain.value(for: .gemini) != nil
 
         if !hasOpenAIKey {
             openAIState = .notConfigured
@@ -181,12 +225,17 @@ final class AppModel {
         if !hasOpenRouterKey {
             openRouterState = .notConfigured
         }
+
+        if !hasGeminiKey {
+            geminiState = .notConfigured
+        }
     }
 
     private func prepareRefreshState() {
         openAIState = hasOpenAIKey ? .loading(previous: openAIState.snapshot) : .notConfigured
         anthropicState = hasAnthropicKey ? .loading(previous: anthropicState.snapshot) : .notConfigured
         openRouterState = hasOpenRouterKey ? .loading(previous: openRouterState.snapshot) : .notConfigured
+        geminiState = hasGeminiKey ? .loading(previous: geminiState.snapshot) : .notConfigured
     }
 
     private func apply(_ result: Result<ProviderSnapshot, UsageError>, for provider: ProviderKind) {
@@ -207,6 +256,8 @@ final class AppModel {
             anthropicState = state
         case .openRouter:
             openRouterState = state
+        case .gemini:
+            geminiState = state
         }
     }
 
@@ -218,6 +269,8 @@ final class AppModel {
             anthropicState
         case .openRouter:
             openRouterState
+        case .gemini:
+            geminiState
         }
     }
 
@@ -260,6 +313,32 @@ final class AppModel {
             anthropicKeyDraft = ""
         case .openRouter:
             openRouterKeyDraft = ""
+        case .gemini:
+            geminiKeyDraft = ""
+        }
+    }
+}
+
+extension AppModel {
+    enum AutoRefreshInterval: Int, CaseIterable, Identifiable {
+        case off = 0
+        case fiveMinutes = 300
+        case fifteenMinutes = 900
+        case thirtyMinutes = 1800
+
+        var id: Int { rawValue }
+
+        var title: String {
+            switch self {
+            case .off:
+                "Off"
+            case .fiveMinutes:
+                "5 min"
+            case .fifteenMinutes:
+                "15 min"
+            case .thirtyMinutes:
+                "30 min"
+            }
         }
     }
 }

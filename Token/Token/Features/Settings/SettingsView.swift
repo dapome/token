@@ -5,82 +5,86 @@ struct SettingsView: View {
 
     var body: some View {
         ScrollView {
-            VStack(alignment: .leading, spacing: 16) {
-                header
+            HStack {
+                Text("API Key Configuration")
+                    .font(.headline)
+                Spacer()
+                Button("Refresh", systemImage: "arrow.clockwise", action: refresh)
+                    .buttonStyle(.bordered)
+                    .controlSize(.small)
+                    .disabled(model.isRefreshing)
+            }
+            .padding(.bottom, 8)
 
-                Text("Token stores admin and management keys in your macOS Keychain. These reporting endpoints do not accept normal API keys: OpenAI requires an organization Admin API key, Anthropic requires an Admin API key plus an organization account, and OpenRouter requires a management key.")
+            Text("Keys are saved in your macOS Keychain. Use admin/management keys for reporting APIs.")
+                .font(.footnote)
+                .foregroundStyle(.secondary)
+                .frame(maxWidth: .infinity, alignment: .leading)
+
+            HStack {
+                Text("Auto-refresh")
+                    .font(.subheadline)
+                Spacer()
+                Picker("Auto-refresh", selection: $model.autoRefreshInterval) {
+                    ForEach(AppModel.AutoRefreshInterval.allCases) { interval in
+                        Text(interval.title).tag(interval)
+                    }
+                }
+                .labelsHidden()
+                .pickerStyle(.menu)
+            }
+            .padding(.top, 6)
+
+            Divider()
+                .padding(.vertical, 4)
+
+            CredentialEditorView(
+                provider: .openAI,
+                hasStoredCredential: model.hasOpenAIKey,
+                state: model.openAIState,
+                draft: $model.openAIKeyDraft,
+                saveAction: saveOpenAIKey,
+                removeAction: removeOpenAIKey
+            )
+
+            CredentialEditorView(
+                provider: .anthropic,
+                hasStoredCredential: model.hasAnthropicKey,
+                state: model.anthropicState,
+                draft: $model.anthropicKeyDraft,
+                saveAction: saveAnthropicKey,
+                removeAction: removeAnthropicKey
+            )
+
+            CredentialEditorView(
+                provider: .openRouter,
+                hasStoredCredential: model.hasOpenRouterKey,
+                state: model.openRouterState,
+                draft: $model.openRouterKeyDraft,
+                saveAction: saveOpenRouterKey,
+                removeAction: removeOpenRouterKey
+            )
+
+            CredentialEditorView(
+                provider: .gemini,
+                hasStoredCredential: model.hasGeminiKey,
+                state: model.geminiState,
+                draft: $model.geminiKeyDraft,
+                saveAction: saveGeminiKey,
+                removeAction: removeGeminiKey
+            )
+
+            if let settingsStatusMessage = model.settingsStatusMessage {
+                Text(settingsStatusMessage)
                     .font(.footnote)
                     .foregroundStyle(.secondary)
-
-                CredentialEditorView(
-                    provider: .openAI,
-                    hasStoredCredential: model.hasOpenAIKey,
-                    state: model.openAIState,
-                    draft: $model.openAIKeyDraft,
-                    saveAction: saveOpenAIKey,
-                    removeAction: removeOpenAIKey
-                )
-
-                CredentialEditorView(
-                    provider: .anthropic,
-                    hasStoredCredential: model.hasAnthropicKey,
-                    state: model.anthropicState,
-                    draft: $model.anthropicKeyDraft,
-                    saveAction: saveAnthropicKey,
-                    removeAction: removeAnthropicKey
-                )
-
-                CredentialEditorView(
-                    provider: .openRouter,
-                    hasStoredCredential: model.hasOpenRouterKey,
-                    state: model.openRouterState,
-                    draft: $model.openRouterKeyDraft,
-                    saveAction: saveOpenRouterKey,
-                    removeAction: removeOpenRouterKey
-                )
-
-                if let settingsStatusMessage = model.settingsStatusMessage {
-                    Label(settingsStatusMessage, systemImage: "info.circle")
-                        .font(.footnote)
-                        .foregroundStyle(.secondary)
-                }
+                    .padding(.top, 2)
             }
-            .padding(20)
         }
-        .frame(minWidth: 520, minHeight: 400)
-        .background(
-            LinearGradient(
-                colors: [
-                    .clear,
-                    .orange.opacity(0.04),
-                    .teal.opacity(0.04),
-                ],
-                startPoint: .topLeading,
-                endPoint: .bottomTrailing
-            )
-        )
+        .padding(16)
+        .frame(minWidth: 420, minHeight: 440)
         .task {
             await model.start()
-        }
-    }
-
-    private var header: some View {
-        HStack(alignment: .firstTextBaseline) {
-            VStack(alignment: .leading, spacing: 2) {
-                Text("Token")
-                    .font(.title2.bold())
-
-                Text("API Key Configuration")
-                    .font(.subheadline)
-                    .foregroundStyle(.secondary)
-            }
-
-            Spacer()
-
-            Button("Refresh", systemImage: "arrow.clockwise", action: refresh)
-                .buttonStyle(.bordered)
-                .controlSize(.small)
-                .disabled(model.isRefreshing)
         }
     }
 
@@ -123,6 +127,18 @@ struct SettingsView: View {
     private func removeOpenRouterKey() {
         Task {
             await model.removeOpenRouterKey()
+        }
+    }
+
+    private func saveGeminiKey() {
+        Task {
+            await model.saveGeminiKey()
+        }
+    }
+
+    private func removeGeminiKey() {
+        Task {
+            await model.removeGeminiKey()
         }
     }
 }

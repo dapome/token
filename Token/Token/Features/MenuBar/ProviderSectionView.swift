@@ -5,10 +5,11 @@ struct ProviderSectionView: View {
     let state: ProviderLoadState
 
     var body: some View {
-        VStack(alignment: .leading, spacing: AppTheme.cardSpacing) {
+        VStack(alignment: .leading, spacing: 6) {
             HStack(spacing: AppTheme.cardSpacing) {
                 Label(provider.title, systemImage: provider.systemImage)
-                    .font(.headline)
+                    .font(.subheadline.weight(.semibold))
+                    .lineLimit(1)
 
                 Spacer()
 
@@ -19,6 +20,7 @@ struct ProviderSectionView: View {
             case .notConfigured:
                 Text("No \(provider.credentialTitle.lowercased()) is stored yet.")
                     .foregroundStyle(.secondary)
+                    .font(.caption)
 
             case .loading(let previous):
                 if let previous {
@@ -37,15 +39,10 @@ struct ProviderSectionView: View {
                 }
 
                 Text(message)
-                    .font(.footnote)
+                    .font(.caption)
                     .foregroundStyle(.orange)
             }
         }
-        .padding(AppTheme.cardPadding)
-        .background(.regularMaterial, in: RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius))
-        .overlay(
-            RoundedRectangle(cornerRadius: AppTheme.cardCornerRadius)
-                .stroke(provider.accentColor.opacity(0.18), lineWidth: 1)
-        )
+        .frame(maxWidth: .infinity, alignment: .leading)
     }
 }

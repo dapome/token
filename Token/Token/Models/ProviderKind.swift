@@ -5,6 +5,7 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
     case openAI
     case anthropic
     case openRouter
+    case gemini
 
     static let subscriptionCases: [Self] = [.openAI, .anthropic]
 
@@ -18,6 +19,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             "Anthropic API"
         case .openRouter:
             "OpenRouter API"
+        case .gemini:
+            "Gemini API"
         }
     }
 
@@ -29,6 +32,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             "Anthropic Admin key"
         case .openRouter:
             "OpenRouter management key"
+        case .gemini:
+            "Gemini API key"
         }
     }
 
@@ -40,6 +45,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             "Paste an Anthropic admin key"
         case .openRouter:
             "Paste an OpenRouter management key"
+        case .gemini:
+            "Paste a Gemini API key"
         }
     }
 
@@ -51,6 +58,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             "Requires an Anthropic Admin API key. Standard Claude API keys will not work, and the Usage & Cost API is unavailable for individual accounts."
         case .openRouter:
             "Requires an OpenRouter management key. Standard OpenRouter API keys will not work for credits or key-usage reporting."
+        case .gemini:
+            "Requires a Google AI Studio Gemini API key. Organization-level spend reporting is limited with this key type."
         }
     }
 
@@ -62,6 +71,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             "Claude"
         case .openRouter:
             "OpenRouter"
+        case .gemini:
+            "Gemini"
         }
     }
 
@@ -73,6 +84,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             "Claude subscription quotas are not exposed through a stable public API."
         case .openRouter:
             "OpenRouter usage is reported through its management API rather than a subscription app."
+        case .gemini:
+            "Gemini API key usage is managed through Google AI Studio and Google Cloud billing."
         }
     }
 
@@ -84,6 +97,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             "anthropic-admin-key"
         case .openRouter:
             "openrouter-management-key"
+        case .gemini:
+            "gemini-api-key"
         }
     }
 
@@ -95,6 +110,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             AppLinks.anthropicUsageDocs
         case .openRouter:
             AppLinks.openRouterUsageDocs
+        case .gemini:
+            AppLinks.geminiUsageDocs
         }
     }
 
@@ -106,6 +123,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             AppLinks.anthropicAdminDocs
         case .openRouter:
             AppLinks.openRouterAdminDocs
+        case .gemini:
+            AppLinks.geminiAdminDocs
         }
     }
 
@@ -117,6 +136,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             AppLinks.claudeUsage
         case .openRouter:
             AppLinks.openRouterCredits
+        case .gemini:
+            AppLinks.geminiUsage
         }
     }
 
@@ -128,6 +149,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             "brain.head.profile"
         case .openRouter:
             "arrow.triangle.branch"
+        case .gemini:
+            "g.circle"
         }
     }
 
@@ -139,6 +162,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             .teal
         case .openRouter:
             .blue
+        case .gemini:
+            .purple
         }
     }
 
@@ -150,6 +175,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             .mint
         case .openRouter:
             .cyan
+        case .gemini:
+            .indigo
         }
     }
 
@@ -161,6 +188,8 @@ enum ProviderKind: String, CaseIterable, Identifiable, Sendable {
             "Usage & cost admin reporting"
         case .openRouter:
             "Credits and API key spend reporting"
+        case .gemini:
+            "Gemini API key connectivity and usage metadata"
         }
     }
 }
