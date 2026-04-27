@@ -1,0 +1,7 @@
+APP_BUNDLE_IDENTIFIER = com.example.token
+APP_DEVELOPMENT_TEAM =
+APP_CODE_SIGN_STYLE = Manual
+APP_CODE_SIGN_IDENTITY = Apple Development
+APP_CODE_SIGN_IDENTITY_SDK = -
+
+#include? "LocalOverrides.xcconfig"
