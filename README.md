@@ -2,6 +2,8 @@
 
 Token is a small macOS menu bar app for checking usage and spend across provider admin APIs.
 
+![Token app screenshot](repo/images/token-gh.jpg)
+
 It currently supports:
 
 - OpenAI organization usage and cost reporting
