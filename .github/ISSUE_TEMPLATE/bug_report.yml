@@ -57,4 +57,4 @@ body:
     id: macos
     attributes:
       label: macOS version
-      placeholder: e.g. 26.2
+      placeholder: e.g. 15.7

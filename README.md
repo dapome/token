@@ -22,7 +22,7 @@ This app is intentionally narrow in scope. It is for org admins who already have
 
 ## Requirements
 
-- macOS 26.2 or later
+- macOS 14.0 or later
 - Xcode 17 or later
 - One or more of the following credentials:
   - OpenAI Admin API key for an organization

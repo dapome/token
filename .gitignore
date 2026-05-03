@@ -69,3 +69,6 @@ fastlane/test_output
 
 # Local release artifacts
 dist/
+
+# Local signing overrides
+Token/Config/LocalOverrides.xcconfig

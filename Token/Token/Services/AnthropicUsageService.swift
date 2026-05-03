@@ -120,17 +120,14 @@ struct AnthropicUsageService: Sendable {
             break
         case 401:
             throw UsageError.unauthorized(
-                "Anthropic rejected the key. These endpoints require an Anthropic Admin API key. \(errorMessage(from: data) ?? "")"
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                "Anthropic rejected the key. These endpoints require an Anthropic Admin API key."
             )
         case 403:
             throw UsageError.accessUnavailable(
-                "Anthropic Usage & Cost Admin API is unavailable for individual accounts and non-admin keys. \(errorMessage(from: data) ?? "")"
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                "Anthropic Usage & Cost Admin API is unavailable for individual accounts and non-admin keys."
             )
         default:
-            let message = errorMessage(from: data) ?? "HTTP \(httpResponse.statusCode)"
-            throw UsageError.requestFailed("Anthropic request failed: \(message)")
+            throw UsageError.requestFailed("Anthropic request failed with HTTP \(httpResponse.statusCode).")
         }
 
         do {
@@ -148,28 +145,9 @@ struct AnthropicUsageService: Sendable {
             }
         }
     }
-
-    private func errorMessage(from data: Data) -> String? {
-        let payload = try? JSONDecoder().decode(AnthropicErrorEnvelope.self, from: data)
-        return payload?.error.message
-    }
 }
 
 extension AnthropicUsageService {
-    struct AnthropicErrorEnvelope: Decodable {
-        let error: AnthropicErrorDetail
-        let requestId: String?
-
-        enum CodingKeys: String, CodingKey {
-            case error
-            case requestId = "request_id"
-        }
-    }
-
-    struct AnthropicErrorDetail: Decodable {
-        let message: String
-    }
-
     struct CostResponse: Decodable {
         let data: [CostBucket]
     }

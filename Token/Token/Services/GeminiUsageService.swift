@@ -41,7 +41,7 @@ struct GeminiUsageService: Sendable {
         request.setValue("Token/1.0", forHTTPHeaderField: "User-Agent")
         request.timeoutInterval = 30
 
-        let (data, response) = try await URLSession.shared.data(for: request)
+        let (_, response) = try await URLSession.shared.data(for: request)
         guard let httpResponse = response as? HTTPURLResponse else {
             throw UsageError.invalidResponse
         }
@@ -54,23 +54,7 @@ struct GeminiUsageService: Sendable {
         case 403:
             throw UsageError.accessUnavailable("Gemini key lacks permission for model access. Check project/API settings.")
         default:
-            let message = errorMessage(from: data) ?? "HTTP \(httpResponse.statusCode)"
-            throw UsageError.requestFailed("Gemini request failed: \(message)")
+            throw UsageError.requestFailed("Gemini request failed with HTTP \(httpResponse.statusCode).")
         }
-    }
-
-    private func errorMessage(from data: Data) -> String? {
-        let payload = try? JSONDecoder().decode(GeminiErrorEnvelope.self, from: data)
-        return payload?.error.message
-    }
-}
-
-extension GeminiUsageService {
-    struct GeminiErrorEnvelope: Decodable {
-        let error: GeminiErrorDetail
-    }
-
-    struct GeminiErrorDetail: Decodable {
-        let message: String
     }
 }

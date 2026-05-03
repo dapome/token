@@ -114,17 +114,14 @@ struct OpenAIUsageService: Sendable {
             break
         case 401:
             throw UsageError.unauthorized(
-                "OpenAI rejected the key. These endpoints require an OpenAI Admin API key. \(errorMessage(from: data) ?? "")"
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                "OpenAI rejected the key. These endpoints require an OpenAI Admin API key."
             )
         case 403:
             throw UsageError.accessUnavailable(
-                "OpenAI blocked access to organization usage data. Confirm that the key is an Admin API key for the organization. \(errorMessage(from: data) ?? "")"
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                "OpenAI blocked access to organization usage data. Confirm that the key is an Admin API key for the organization."
             )
         default:
-            let message = errorMessage(from: data) ?? "HTTP \(httpResponse.statusCode)"
-            throw UsageError.requestFailed("OpenAI request failed: \(message)")
+            throw UsageError.requestFailed("OpenAI request failed with HTTP \(httpResponse.statusCode).")
         }
 
         let object = try? JSONSerialization.jsonObject(with: data)
@@ -221,22 +218,9 @@ struct OpenAIUsageService: Sendable {
         }
     }
 
-    private func errorMessage(from data: Data) -> String? {
-        let payload = try? JSONDecoder().decode(OpenAIErrorEnvelope.self, from: data)
-        return payload?.error.message
-    }
-
 }
 
 extension OpenAIUsageService {
-    struct OpenAIErrorEnvelope: Decodable {
-        let error: OpenAIErrorDetail
-    }
-
-    struct OpenAIErrorDetail: Decodable {
-        let message: String
-    }
-
     struct CostBucket {
         let totalCost: Decimal
     }

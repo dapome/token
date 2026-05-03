@@ -1,0 +1,7 @@
+// Copy this file to LocalOverrides.xcconfig and fill in your local signing values.
+// Keep LocalOverrides.xcconfig untracked.
+APP_BUNDLE_IDENTIFIER = com.example.token
+APP_DEVELOPMENT_TEAM =
+APP_CODE_SIGN_STYLE = Automatic
+APP_CODE_SIGN_IDENTITY = Apple Development
+APP_CODE_SIGN_IDENTITY_SDK = Apple Development

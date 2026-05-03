@@ -91,17 +91,14 @@ struct OpenRouterUsageService: Sendable {
             break
         case 401:
             throw UsageError.unauthorized(
-                "OpenRouter rejected the key. These endpoints require a valid OpenRouter management key. \(errorMessage(from: data) ?? "")"
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                "OpenRouter rejected the key. These endpoints require a valid OpenRouter management key."
             )
         case 403:
             throw UsageError.accessUnavailable(
-                "OpenRouter blocked access to credits or key reporting. These endpoints require a management key rather than a standard API key. \(errorMessage(from: data) ?? "")"
-                    .trimmingCharacters(in: .whitespacesAndNewlines)
+                "OpenRouter blocked access to credits or key reporting. These endpoints require a management key rather than a standard API key."
             )
         default:
-            let message = errorMessage(from: data) ?? "HTTP \(httpResponse.statusCode)"
-            throw UsageError.requestFailed("OpenRouter request failed: \(message)")
+            throw UsageError.requestFailed("OpenRouter request failed with HTTP \(httpResponse.statusCode).")
         }
 
         do {
@@ -110,22 +107,9 @@ struct OpenRouterUsageService: Sendable {
             throw UsageError.invalidPayload
         }
     }
-
-    private func errorMessage(from data: Data) -> String? {
-        let payload = try? JSONDecoder().decode(OpenRouterErrorEnvelope.self, from: data)
-        return payload?.error.message
-    }
 }
 
 extension OpenRouterUsageService {
-    struct OpenRouterErrorEnvelope: Decodable {
-        let error: OpenRouterErrorDetail
-    }
-
-    struct OpenRouterErrorDetail: Decodable {
-        let message: String
-    }
-
     struct CreditsResponse: Decodable {
         let data: CreditSummary
     }

@@ -3,7 +3,7 @@ import Security
 
 struct KeychainStore {
     private let serviceName = Bundle.main.bundleIdentifier ?? "dev.usagebuddy.token"
-    private let accessibleClass = kSecAttrAccessibleAfterFirstUnlockThisDeviceOnly
+    private let accessibleClass = kSecAttrAccessibleWhenUnlockedThisDeviceOnly
 
     func value(for provider: ProviderKind) -> String? {
         let query = baseQuery(for: provider).merging([
