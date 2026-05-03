@@ -6,9 +6,6 @@
 	objectVersion = 77;
 	objects = {
 
-/* Begin PBXBuildFile section */
-/* End PBXBuildFile section */
-
 /* Begin PBXContainerItemProxy section */
 		01B810A72F948A0000B23E1C /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -358,7 +355,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 0.24;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.token;
+				PRODUCT_BUNDLE_IDENTIFIER = com.onethirteen.token;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;
@@ -385,11 +382,12 @@
 				AUTOMATION_APPLE_EVENTS = NO;
 				CODE_SIGN_ENTITLEMENTS = Token/Token.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
-				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "-";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Developer ID Application";
 				CODE_SIGN_STYLE = Manual;
 				COMBINE_HIDPI_IMAGES = YES;
 				CURRENT_PROJECT_VERSION = 100;
 				DEVELOPMENT_TEAM = "";
+				"DEVELOPMENT_TEAM[sdk=macosx*]" = WT853NZCL8;
 				ENABLE_APP_SANDBOX = YES;
 				ENABLE_HARDENED_RUNTIME = YES;
 				ENABLE_PREVIEWS = YES;
@@ -409,7 +407,7 @@
 					"@executable_path/../Frameworks",
 				);
 				MARKETING_VERSION = 0.24;
-				PRODUCT_BUNDLE_IDENTIFIER = dev.token;
+				PRODUCT_BUNDLE_IDENTIFIER = com.onethirteen.token;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE_SPECIFIER = "";
 				RUNTIME_EXCEPTION_ALLOW_DYLD_ENVIRONMENT_VARIABLES = NO;

@@ -24,6 +24,11 @@ Recommended manual checks:
 - Launch app and verify menu bar rendering.
 - Verify at least one provider path end-to-end.
 - Confirm credential save/update/delete behavior in settings.
+- Regenerate the README screenshot if the menu UI changed:
+
+```sh
+scripts/render-demo-screenshot.sh repo/images/token-gh.jpg
+```
 
 ## 3) Commit and tag
 
@@ -53,7 +58,36 @@ git push origin main --tags
 
 If distributing binaries outside source builds:
 
-- Set your own bundle ID and signing team in Xcode.
-- Archive app with release signing.
-- Notarize with Apple.
-- Attach notarized artifact to GitHub release.
+- Install a Developer ID Application certificate in Keychain.
+- Store notarization credentials once:
+
+```sh
+xcrun notarytool store-credentials "token-notary" \
+  --apple-id "you@example.com" \
+  --team-id "TEAMID" \
+  --password "app-specific-password"
+```
+
+If Apple ID authentication fails, use a Team App Store Connect API key instead. In App Store Connect, go to **Users and Access > Integrations > App Store Connect API**, select **Team Keys**, create a key, download the `.p8` file, and keep the key private.
+
+- Build, sign, notarize, staple, and verify the DMG with a Keychain profile:
+
+```sh
+TOKEN_DEVELOPMENT_TEAM=TEAMID \
+TOKEN_BUNDLE_ID=dev.example.token \
+NOTARY_PROFILE=token-notary \
+scripts/make-notarized-dmg.sh 0.24
+```
+
+- Or build, sign, notarize, staple, and verify the DMG with an App Store Connect API key:
+
+```sh
+TOKEN_DEVELOPMENT_TEAM=TEAMID \
+TOKEN_BUNDLE_ID=dev.example.token \
+NOTARY_KEY=/path/to/AuthKey_ABC123DEFG.p8 \
+NOTARY_KEY_ID=ABC123DEFG \
+NOTARY_ISSUER=00000000-0000-0000-0000-000000000000 \
+scripts/make-notarized-dmg.sh 0.24
+```
+
+- Attach the notarized artifact from `dist/` to the GitHub release.
